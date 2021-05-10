@@ -1,0 +1,4 @@
+include ':story'
+include ':splash'
+include ':app'
+rootProject.name = "Guru Test"
