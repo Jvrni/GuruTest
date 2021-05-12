@@ -55,6 +55,9 @@ dependencies {
     implementation generalDeps.appcompat
     implementation generalDeps.koin
 
+    implementation generalDeps.koinAc
+    implementation generalDeps.reflect
+
     implementation generalDeps.materialDesign
     implementation generalDeps.constraintlayout
 

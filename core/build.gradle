@@ -1,0 +1,7 @@
+apply from: "$rootDir/config-default.gradle"
+
+dependencies {
+    implementation generalDeps.jwt
+    implementation generalDeps.coroutinesCore
+    implementation generalDeps.coroutinesAndroid
+}

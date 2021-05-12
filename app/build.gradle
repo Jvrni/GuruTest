@@ -45,6 +45,9 @@ android {
 }
 
 dependencies {
+    implementation project(':core')
+    implementation project(':home')
+
     implementation generalDeps.core
     implementation generalDeps.kotlinJdk
     implementation generalDeps.koin
