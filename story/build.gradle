@@ -1,1 +1,14 @@
 apply from: "$rootDir/config-default.gradle"
+
+dependencies {
+    implementation project(':core')
+    implementation project(':domain')
+
+    implementation generalDeps.viewPager2
+    implementation generalDeps.glide
+    kapt generalDeps.glideCompiler
+
+    implementation generalDeps.jwt
+    implementation generalDeps.coroutinesCore
+    implementation generalDeps.coroutinesAndroid
+}

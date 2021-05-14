@@ -1,0 +1,15 @@
+apply from: "$rootDir/config-default.gradle"
+
+dependencies {
+    implementation generalDeps.gson
+
+    implementation generalDeps.viewModel
+
+    implementation generalDeps.koin
+    implementation generalDeps.koinAc
+    implementation generalDeps.reflect
+
+    implementation generalDeps.jwt
+    implementation generalDeps.coroutinesCore
+    implementation generalDeps.coroutinesAndroid
+}

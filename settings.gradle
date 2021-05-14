@@ -1,3 +1,7 @@
+include ':data'
+include ':home'
+include ':domain'
+include ':core'
 include ':story'
 include ':splash'
 include ':app'

@@ -1,0 +1,21 @@
+apply from: "$rootDir/config-default.gradle"
+
+dependencies {
+    implementation project(':domain')
+    implementation project(':core')
+
+    // Persistence:
+    debugImplementation generalDeps.debugDb
+
+    implementation generalDeps.retrofit
+    implementation generalDeps.retrofitMoshiConverter
+
+    implementation generalDeps.coroutinesAdapter
+
+    // Logging:
+    implementation generalDeps.okhttp3LoggingInterceptor
+
+    testImplementation testDeps.assertj
+    testImplementation generalDeps.json
+
+}
