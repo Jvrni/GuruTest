@@ -22,6 +22,7 @@
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         android:orientation="horizontal"
         tools:itemCount="10"
+        android:elevation="10dp"
         android:layout_marginTop="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

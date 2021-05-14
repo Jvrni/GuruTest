@@ -46,11 +46,24 @@ android {
 
 dependencies {
     implementation project(':core')
+    implementation project(':data')
+    implementation project(':domain')
+    implementation project(':splash')
     implementation project(':home')
+
+    implementation generalDeps.viewModel
 
     implementation generalDeps.core
     implementation generalDeps.kotlinJdk
     implementation generalDeps.koin
+    implementation generalDeps.koinAc
+    implementation generalDeps.reflect
+
+    implementation generalDeps.gson
+
+    implementation generalDeps.jwt
+    implementation generalDeps.coroutinesCore
+    implementation generalDeps.coroutinesAndroid
 
     testImplementation testDeps.junit
     androidTestImplementation androidTestDeps.junitrunner

@@ -8,4 +8,9 @@ dependencies {
     implementation generalDeps.jwt
     implementation generalDeps.coroutinesCore
     implementation generalDeps.coroutinesAndroid
+
+    testImplementation testDeps.mockK
+    testImplementation testDeps.lifecycleTest
+    testImplementation testDeps.coroutinesTest
+
 }

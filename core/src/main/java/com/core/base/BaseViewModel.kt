@@ -3,12 +3,10 @@ package com.core.base
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import org.koin.dsl.context.ParameterProvider
 import org.koin.standalone.KoinComponent
 
 abstract class BaseViewModel : ViewModel(), KoinComponent, CoroutineScope {
@@ -22,22 +20,6 @@ abstract class BaseViewModel : ViewModel(), KoinComponent, CoroutineScope {
     }
 }
 
-inline fun <reified T : BaseActivity<*>> BaseViewModel.navigateTo(
-    parameterProvider: ParameterProvider,
-    context: Context
-) =
-    context.startActivity(Intent(context, T::class.java).apply {
-        putExtras(parameterProvider.getBundleExtras())
-    })
-
-inline fun <reified T : BaseActivity<*>> BaseViewModel.navigateTo(
-    parameterProvider: ParameterProvider,
-    context: Context,
-    transition: Bundle?
-) =
-    context.startActivity(Intent(context, T::class.java).apply {
-        putExtras(parameterProvider.getBundleExtras())
-    }, transition)
 
 inline fun <reified T : BaseActivity<*>> BaseViewModel.navigateTo(context: Context) =
     context.startActivity(Intent(context, T::class.java))

@@ -53,8 +53,9 @@ dependencies {
     implementation generalDeps.core
     implementation generalDeps.kotlinJdk
     implementation generalDeps.appcompat
-    implementation generalDeps.koin
+    implementation generalDeps.viewModel
 
+    implementation generalDeps.koin
     implementation generalDeps.koinAc
     implementation generalDeps.reflect
 

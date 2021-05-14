@@ -1,4 +1,4 @@
-package com.core.base
+package com.core.extensions
 
 import android.os.Bundle
 import org.koin.core.parameter.Parameters

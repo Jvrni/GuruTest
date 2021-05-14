@@ -1,7 +1,15 @@
 package com.home.view
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
+import android.opengl.Visibility
 import android.os.Bundle
+import android.view.View
 import com.core.base.BaseActivity
+import com.core.extensions.hide
+import com.core.extensions.observe
+import com.core.extensions.show
 import com.home.R
 import kotlinx.android.synthetic.main.activity_home.*
 import org.koin.android.architecture.ext.viewModel
@@ -15,89 +23,38 @@ class HomeActivity : BaseActivity<HomeViewModel>() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        storyHome.setAdapter(
-            listOf(
-                Story(
-                    title = "BB BI vê bom resultado da Usiminas (USIM5) já precificado em ação e eleva preço-alvo",
-                    origin = "Suno",
-                    link = "https://www.suno.com.br/noticias/?p=142116",
-                    isPriority = false,
-                    image = "https://storage.googleapis.com/wp-noticias/2021/04/d62cfc0f-usiminas.jpg",
-                    published = "2021 - 04 - 26 T13 :52:24:000 + 0000"
-                ),
-                Story(
-                    title = "BB BI vê bom resultado da Usiminas (USIM5) já precificado em ação e eleva preço-alvo",
-                    origin = "Suno",
-                    link = "https://www.suno.com.br/noticias/?p=142116",
-                    isPriority = false,
-                    image = "https://storage.googleapis.com/wp-noticias/2021/04/d62cfc0f-usiminas.jpg",
-                    published = "2021 - 04 - 26 T13 :52:24:000 + 0000"
-                ),
-                Story(
-                    title = "BB BI vê bom resultado da Usiminas (USIM5) já precificado em ação e eleva preço-alvo",
-                    origin = "Suno",
-                    link = "https://www.suno.com.br/noticias/?p=142116",
-                    isPriority = false,
-                    image = "https://storage.googleapis.com/wp-noticias/2021/04/d62cfc0f-usiminas.jpg",
-                    published = "2021 - 04 - 26 T13 :52:24:000 + 0000"
-                ),
-                Story(
-                    title = "BB BI vê bom resultado da Usiminas (USIM5) já precificado em ação e eleva preço-alvo",
-                    origin = "Suno",
-                    link = "https://www.suno.com.br/noticias/?p=142116",
-                    isPriority = false,
-                    image = "https://storage.googleapis.com/wp-noticias/2021/04/d62cfc0f-usiminas.jpg",
-                    published = "2021 - 04 - 26 T13 :52:24:000 + 0000"
-                ),
-                Story(
-                    title = "BB BI vê bom resultado da Usiminas (USIM5) já precificado em ação e eleva preço-alvo",
-                    origin = "Suno",
-                    link = "https://www.suno.com.br/noticias/?p=142116",
-                    isPriority = false,
-                    image = "https://storage.googleapis.com/wp-noticias/2021/04/d62cfc0f-usiminas.jpg",
-                    published = "2021 - 04 - 26 T13 :52:24:000 + 0000"
-                ),
-                Story(
-                    title = "BB BI vê bom resultado da Usiminas (USIM5) já precificado em ação e eleva preço-alvo",
-                    origin = "Suno",
-                    link = "https://www.suno.com.br/noticias/?p=142116",
-                    isPriority = false,
-                    image = "https://storage.googleapis.com/wp-noticias/2021/04/d62cfc0f-usiminas.jpg",
-                    published = "2021 - 04 - 26 T13 :52:24:000 + 0000"
-                ),
-                Story(
-                    title = "BB BI vê bom resultado da Usiminas (USIM5) já precificado em ação e eleva preço-alvo",
-                    origin = "Suno",
-                    link = "https://www.suno.com.br/noticias/?p=142116",
-                    isPriority = false,
-                    image = "https://storage.googleapis.com/wp-noticias/2021/04/d62cfc0f-usiminas.jpg",
-                    published = "2021 - 04 - 26 T13 :52:24:000 + 0000"
-                ),
-                Story(
-                    title = "BB BI vê bom resultado da Usiminas (USIM5) já precificado em ação e eleva preço-alvo",
-                    origin = "Suno",
-                    link = "https://www.suno.com.br/noticias/?p=142116",
-                    isPriority = false,
-                    image = "https://storage.googleapis.com/wp-noticias/2021/04/d62cfc0f-usiminas.jpg",
-                    published = "2021 - 04 - 26 T13 :52:24:000 + 0000"
-                ),
-                Story(
-                    title = "BB BI vê bom resultado da Usiminas (USIM5) já precificado em ação e eleva preço-alvo",
-                    origin = "Suno",
-                    link = "https://www.suno.com.br/noticias/?p=142116",
-                    isPriority = false,
-                    image = "https://storage.googleapis.com/wp-noticias/2021/04/d62cfc0f-usiminas.jpg",
-                    published = "2021 - 04 - 26 T13 :52:24:000 + 0000"
-                ),
-                Story(
-                    title = "BB BI vê bom resultado da Usiminas (USIM5) já precificado em ação e eleva preço-alvo",
-                    origin = "Suno",
-                    link = "https://www.suno.com.br/noticias/?p=142116",
-                    isPriority = false,
-                    image = "https://storage.googleapis.com/wp-noticias/2021/04/d62cfc0f-usiminas.jpg",
-                    published = "2021 - 04 - 26 T13 :52:24:000 + 0000"
-                )
-            )
-        )
+        prepareObservers()
+        initialize()
+        txtEmptyStoryHome.setOnClickListener { initialize() }
+    }
+
+    private fun initialize() {
+        loadingHome.show()
+        viewModel.init()
+    }
+
+    private fun prepareObservers() {
+        viewModel.storys().observe(this) { story ->
+            storyHome.setAdapter(story.items)
+            storyHome.show()
+            txtStoreHome.show()
+            txtEmptyStoryHome.hide()
+            loadingHome.hide()
+        }
+
+        viewModel.emptyStorys().observe(this) {
+            storyHome.hide()
+            txtStoreHome.hide()
+            loadingHome.hide()
+            txtEmptyStoryHome.show()
+        }
+    }
+
+    fun openPlayStore(view: View) {
+        try {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=vc.com.guruapp")))
+        } catch (e: ActivityNotFoundException) {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=vc.com.guruapp")))
+        }
     }
 }
