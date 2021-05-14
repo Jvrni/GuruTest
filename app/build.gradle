@@ -52,6 +52,7 @@ dependencies {
     implementation project(':home')
 
     implementation generalDeps.viewModel
+    implementation generalDeps.appcompat
 
     implementation generalDeps.core
     implementation generalDeps.kotlinJdk
